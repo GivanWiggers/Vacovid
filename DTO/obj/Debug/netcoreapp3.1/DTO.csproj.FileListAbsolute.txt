@@ -1,0 +1,5 @@
+C:\Users\gwigg\source\repos\Vacovid\DTO\bin\Debug\netcoreapp3.1\DTO.deps.json
+C:\Users\gwigg\source\repos\Vacovid\DTO\bin\Debug\netcoreapp3.1\DTO.dll
+C:\Users\gwigg\source\repos\Vacovid\DTO\obj\Debug\netcoreapp3.1\DTO.csprojAssemblyReference.cache
+C:\Users\gwigg\source\repos\Vacovid\DTO\obj\Debug\netcoreapp3.1\DTO.AssemblyInfoInputs.cache
+C:\Users\gwigg\source\repos\Vacovid\DTO\obj\Debug\netcoreapp3.1\DTO.AssemblyInfo.cs

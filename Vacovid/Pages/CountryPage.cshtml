@@ -1,0 +1,223 @@
+﻿@page "{id}"
+@using Logic
+@model Vacovid.Pages.CountryPageModel
+@{
+    Layout = "_Layout";
+}
+@{
+    string countryImage = "data:image/png;base64," + Convert.ToBase64String(@Model.country.CountryFlag, 0, @Model.country.CountryFlag.Length);
+
+}
+<!DOCTYPE html>
+<title>CountryPage-@Model.country.CountryName</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+
+    html, body, h1, h2, h3, h4, h5, h6 {
+        font-family: "Karla", sans-serif;
+    }
+</style>
+<html>
+
+<body class="w3-light-grey">
+
+    <!-- Page Container -->
+    <div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+        <!-- The Grid -->
+        <div class="w3-row-padding">
+
+
+
+            <!-- Left Column -->
+            <div class="w3-twothird">
+
+                <div class="w3-container w3-card w3-white w3-margin-bottom">
+                    <h2 class="w3-text-Red w3-padding-16">@*<i class="fa fa-globe-europe fa-fw w3-margin-right w3-xxlarge w3-text-Red"></i>*@@Model.country.CountryName</h2>
+                    <div class="w3-container">
+                        <h5 class="w3-opacity w3-text-blue"><i class="fa fa-city fa-fw w3-margin-right"></i><b>@Model.country.CountryCapital</b></h5>
+                        <h6 class="w3-text-green"><i class="fa fa-wallet fa-fw w3-margin-right"></i><span class="w3-tag w3-green w3-round">@Model.country.CountryCurrency</span></h6>
+                        <p>@Model.country.CountryInformation</p>
+                        <hr>
+                    </div>
+                </div>
+
+                @foreach (var attr in Model.attractionList)
+                {
+                    string attractionImage;
+                    if (attr != null)
+                    {
+                        attractionImage = "data:image/png;base64," + Convert.ToBase64String(attr.AttractionImage, 0, attr.AttractionImage.Length);
+                        <div class="w3-container w3-card w3-white w3-margin-bottom">
+                            <div class="w3-third">
+                                <img class="w3-margin-top" src=@attractionImage style="width:100%; border:solid 0.5px grey;" alt="Avatar">
+                            </div>
+                            <div class="w3-twothird">
+                                <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-landmark fa-fw w3-margin-right w3-xxlarge w3-text-darkblue"></i>@attr.AttractionName</h2>
+                                <div class="w3-container">
+                                    <h5 class="w3-opacity"><b></b></h5>
+                                    <h6 class="w3-text-darkblue"></h6>
+                                    <p>@attr.AttractionInformation</p>
+                                    <hr>
+                                </div>
+                            </div>
+
+                            @*<div class="w3-container">
+                                <h5 class="w3-opacity"><b>London Business School</b></h5>
+                                <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2013 - 2015</h6>
+                                <p>Master Degree</p>
+                                <hr>
+                            </div>
+                            <div class="w3-container">
+                                <h5 class="w3-opacity"><b>School of Coding</b></h5>
+                                <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2010 - 2013</h6>
+                                <p>Bachelor Degree</p><br>
+                            </div>*@
+
+                        </div>
+
+                        <!-- End Left Column -->
+                    }
+
+
+                }
+            </div>
+            <!-- Right Column -->
+            <div class="w3-third">
+
+                <div class="w3-white w3-text-grey w3-card-4">
+                    <div class="w3-display-container">
+                        <div>
+                            @if (Model.covid.CovidCode == "Red" || Model.covid.CovidCode == "Lockdown")
+                            {
+                                <h2 class="w3-text-blue">
+                                    COVID-19 Status:
+                                    <span class="w3-tag w3-red w3-round">@Model.covid.CovidCode</span>
+                                </h2>
+                            }
+                            else if (Model.covid.CovidCode == "Orange")
+                            {
+                                <h2 class="w3-text-blue">
+                                    COVID-19 Status:
+                                    <span class="w3-tag w3-orange w3-round">@Model.covid.CovidCode</span>
+                                </h2>
+                            }
+                            else if (Model.covid.CovidCode == "Green")
+                            {
+                                <h2 class="w3-text-blue">
+                                    COVID-19 Status:
+                                    <span class="w3-tag w3-green w3-round">@Model.covid.CovidCode</span>
+                                </h2>
+                            }
+                            else
+                            {
+                                <h5 class="w3-text-blue" style="width:100%;">
+                                    COVID-19 Status not available
+                                </h5>
+                            }
+                        </div>
+                        <img src=@countryImage style="width:100%; border:solid 0.5px grey;" alt="Avatar">
+                        @*<div class="w3-display-bottomleft w3-container w3-text-black">
+                            <h2>@country.CountryName</h2>
+                        </div>*@
+                    </div>
+                    <div class="w3-container" style="margin-top:10px;">
+                        <p><i class="fa fa-flag fa-fw w3-margin-right w3-large w3-text-blue"></i>@Model.country.CountryArea.ToString("N0") km²</p>
+                        <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-blue"></i>@Model.country.CountryPopulation.ToString("N0") People</p>
+                        <p><i class="fa fa-balance-scale fa-fw w3-margin-right w3-large w3-text-blue"></i>@Model.country.CountryRegime</p>
+                        <p><i class="fa fa-language fa-fw w3-margin-right w3-large w3-text-blue"></i>@Model.country.CountryLanguage</p>
+                        <hr>
+
+                        @*<p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Skills</b></p>
+                        <p>Adobe Photoshop</p>
+                        <div class="w3-light-grey w3-round-xlarge w3-small">
+                            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:90%">90%</div>
+                        </div>
+                        <p>Photography</p>
+                        <div class="w3-light-grey w3-round-xlarge w3-small">
+                            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:80%">
+                                <div class="w3-center w3-text-white">80%</div>
+                            </div>
+                        </div>
+                        <p>Illustrator</p>
+                        <div class="w3-light-grey w3-round-xlarge w3-small">
+                            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:75%">75%</div>
+                        </div>
+                        <p>Media</p>
+                        <div class="w3-light-grey w3-round-xlarge w3-small">
+                            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:50%">50%</div>
+                        </div>
+                        <br>
+
+                        <p class="w3-large w3-text-theme"><b><i class="fa fa-globe fa-fw w3-margin-right w3-text-teal"></i>Languages</b></p>
+                        <p>English</p>
+                        <div class="w3-light-grey w3-round-xlarge">
+                            <div class="w3-round-xlarge w3-teal" style="height:24px;width:100%"></div>
+                        </div>
+                        <p>Spanish</p>
+                        <div class="w3-light-grey w3-round-xlarge">
+                            <div class="w3-round-xlarge w3-teal" style="height:24px;width:55%"></div>
+                        </div>
+                        <p>German</p>
+                        <div class="w3-light-grey w3-round-xlarge">
+                            <div class="w3-round-xlarge w3-teal" style="height:24px;width:25%"></div>
+                        </div>*@
+                        <br>
+                    </div>
+                </div><br>
+
+                <!-- End Right Column -->
+            </div>
+            <!-- End Grid -->
+        </div>
+
+        <!-- End Page Container -->
+
+        <!--TEST API-->
+        @*<div> 
+            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+            <script type="text/javascript">
+                google.charts.load('current', {
+                    'packages': ['geochart'],
+                    // Note: you will need to get a mapsApiKey for your project.
+                    // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+                    'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
+                });
+                google.charts.setOnLoadCallback(drawRegionsMap);
+
+                function drawRegionsMap() {
+                    var data = google.visualization.arrayToDataTable([
+                        ['Country', 'Popularity'],
+                        ['@country.CountryName', 2100],
+                        ['United States', 300],
+                        ['Brazil', 400],
+                        ['Canada', 500],
+                        ['France', 600],
+                        ['RU', 700]
+                    ]);
+
+                    var options = {
+                        region: '150', //Europe
+                        backgroundColor: '#D3EEF9',
+                        datalessRegionColor: 'grey',
+                        colorAxis: { colors: ['blue', 'blue', 'blue'] },
+                        legend: 'none'
+                    };
+
+                    var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+
+                    chart.draw(data, options);
+                }
+            </script>
+        </div>
+        <div>
+            <div id="regions_div" style="width: 900px; height: 500px;"></div>
+        </div>*@
+    </div>
+    <footer>
+    </footer>
+
+</body>
+</html>
